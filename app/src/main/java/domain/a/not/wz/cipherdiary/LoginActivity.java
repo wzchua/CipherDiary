@@ -54,7 +54,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityFra
                 return true;
             }
             //TODO: rename diary
-            //TODO: delete diary
             case R.id.action_delete_diary: {
                 Intent intent = new Intent(this, DeleteDiaryListActivity.class);
                 startActivity(intent);

@@ -28,7 +28,6 @@ public class DeleteDiaryListActivityFragment extends Fragment implements LoaderM
     private View mEmptyView;
     private RecyclerView mRecyclerView;
 
-    //TODO: delete a diary
     public DeleteDiaryListActivityFragment() {
     }
 
@@ -51,7 +50,7 @@ public class DeleteDiaryListActivityFragment extends Fragment implements LoaderM
             @Override
             public void onItemClick(View view, final Cursor cursor, int adapterType) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                builder.setMessage("Are you sure you want to delete this entry"); //TODO: change to string res
+                builder.setMessage(R.string.text_delete_diary_list_confirmation);
                 builder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
