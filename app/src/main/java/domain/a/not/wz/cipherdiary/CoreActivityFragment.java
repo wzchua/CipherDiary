@@ -125,7 +125,7 @@ public class CoreActivityFragment extends Fragment implements LoaderManager.Load
                 c.set(Calendar.MONTH, month - 1);
                 String monthString = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
 
-                String title = diaryName + " - " + monthString + " " + yearString;
+                String title = diaryName + " - " + yearString + " " + monthString;
                 getActivity().setTitle(title);
                 break;
             }
@@ -136,7 +136,7 @@ public class CoreActivityFragment extends Fragment implements LoaderManager.Load
                 c.set(Calendar.MONTH, month - 1);
                 String monthString = c.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.ENGLISH);
                 String dayString = args.getString(CORE_DAY_KEY);
-                String title = diaryName + " - " + dayString + " " + monthString + " " + yearString;
+                String title = diaryName + " - " + yearString + " " + monthString + " " + dayString;
 
                 getActivity().setTitle(title);
                 break;

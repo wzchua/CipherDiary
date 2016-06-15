@@ -61,6 +61,7 @@ public class CoreActivity extends AppCompatActivity implements CoreActivityFragm
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
+        //TODO: add a lock button: action terminates this activity and starts LoginActivity
         if (id == R.id.action_add_entry) {
             Intent intent = new Intent(this, InputEntryActivity.class);
             startActivity(intent);

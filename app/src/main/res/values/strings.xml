@@ -12,6 +12,7 @@
     <string name="main_selected_db_default">No diary selected</string>
     <string name="title_delete_diary_list">Select a diary to delete</string>
     <string name="text_delete_diary_list_confirmation">Are you sure you want to delete this entry</string>
+    <string name="button_login_unlock">Unlock</string>
 
 
     <string name="diary_date_header">Date</string>

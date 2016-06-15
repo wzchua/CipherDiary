@@ -13,6 +13,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.GregorianCalendar;
+
 import domain.a.not.wz.cipherdiary.CoreActivityFragment;
 import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.tools.RecyclerViewCursorAdapter;
@@ -21,6 +24,8 @@ import domain.a.not.wz.cipherdiary.tools.RecyclerViewCursorAdapter;
  * Created by Wz on 001, Jun 01.
  */
 public class DiaryRecyclerViewAdapter extends RecyclerViewCursorAdapter<DiaryRecyclerViewAdapter.ViewHolder>{
+
+    private static final SimpleDateFormat YEAR_MONTH_DATE_FORMAT = new SimpleDateFormat("yyyy MMMM");
 
     private Context mContext;
     private OnItemClickListener mListener;
@@ -61,23 +66,22 @@ public class DiaryRecyclerViewAdapter extends RecyclerViewCursorAdapter<DiaryRec
             mHeader = (TextView)itemView.findViewById(R.id.basic_list_item_text);
             itemView.setOnClickListener(this);
         }
-        //TODO: style header
+        //TODO: redesign year month list view: month listing with year header groups
         public void bindView(Cursor c) {
             switch(mAdapterType) {
                 case CoreActivityFragment.CORE_FRAGMENT_YEAR_MONTH_LISTVIEW: {
-                    String header = c.getString(c.getColumnIndex("year")) + "-" +
-                            c.getString(c.getColumnIndex("month"));
+                    String header = formatYearMonth(c);
                     mHeader.setText(header);
                     break;
                 }
                 case CoreActivityFragment.CORE_FRAGMENT_DAY_LISTVIEW: {
-                    String header = c.getString(c.getColumnIndex("day"));
+                    String header = c.getString(c.getColumnIndex(DiaryContract.DiaryDateViewEntry.COLUMN_DAY));
                     mHeader.setText(header);
 
                     break;
                 }
                 case CoreActivityFragment.CORE_FRAGMENT_ENTRIES_LISTVIEW: {
-                    String header = c.getString(c.getColumnIndex("title"));
+                    String header = c.getString(c.getColumnIndex(DiaryContract.DiaryEntry.COLUMN_TITLE));
                     mHeader.setText(header);
 
                     break;
@@ -97,6 +101,17 @@ public class DiaryRecyclerViewAdapter extends RecyclerViewCursorAdapter<DiaryRec
             }
         }
     }
+
+    public static String formatYearMonth(Cursor c) {
+        String yearStr = c.getString(c.getColumnIndex(DiaryContract.DiaryDateViewEntry.COLUMN_YEAR));
+        String monthStr = c.getString(c.getColumnIndex(DiaryContract.DiaryDateViewEntry.COLUMN_MONTH));
+        int year = Integer.parseInt(yearStr);
+        int month = Integer.parseInt(monthStr) - 1;
+        GregorianCalendar cal = new GregorianCalendar(year, month, 1);
+
+        return YEAR_MONTH_DATE_FORMAT.format(cal.getTime());
+    }
+
     public static class DividerItemDecoration extends RecyclerView.ItemDecoration {
 
         private static final int[] ATTRS = new int[]{android.R.attr.listDivider};
@@ -138,4 +153,5 @@ public class DiaryRecyclerViewAdapter extends RecyclerViewCursorAdapter<DiaryRec
             }
         }
     }
+
 }
