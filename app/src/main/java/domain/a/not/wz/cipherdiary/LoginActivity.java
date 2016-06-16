@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityFra
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getMenuInflater().inflate(R.menu.menu_login, menu);
         return true;
     }
 
@@ -155,7 +155,6 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityFra
             Intent intent = new Intent(this, CoreActivity.class);
             intent.putExtra("diaryName", diaryName);
             startActivity(intent);
-            finish();
             return true;
         } else {
             Log.v("MAIN_ACTIVITY", "login failure");

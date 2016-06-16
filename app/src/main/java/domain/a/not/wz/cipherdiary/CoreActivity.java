@@ -67,6 +67,12 @@ public class CoreActivity extends AppCompatActivity implements CoreActivityFragm
             startActivity(intent);
             return true;
         }
+        if(id == R.id.action_lock_diary) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            return true;
+        }
         if(id == android.R.id.home) {
             FragmentManager fm = getSupportFragmentManager();
             if(fm.getBackStackEntryCount() > 0) {

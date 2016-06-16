@@ -12,4 +12,8 @@
         android:orderInCategory="90"
         android:title="@string/action_add_entry"
         app:showAsAction="never"/>
+    <item android:id="@+id/action_lock_diary"
+        android:orderInCategory="80"
+        android:title="@string/action_lock_diary"
+        app:showAsAction="never"/><!--TODO: set as icon, always on bar -->
 </menu>
