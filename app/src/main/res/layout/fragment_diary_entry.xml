@@ -6,30 +6,35 @@
     tools:showIn="@layout/activity_diary_entry"
     android:orientation="vertical">
 
-    <LinearLayout
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="0.7"
-            android:layout_height="wrap_content"
-            android:text="Title"
-            android:id="@+id/diary_entry_title"/>
-        <TextView
-            android:layout_width="0dp"
-            android:layout_weight="0.3"
-            android:layout_height="wrap_content"
-            android:text="7 Jul 2017"
-            android:id="@+id/diary_entry_date" />
-    </LinearLayout>
+        android:fontFamily="sans-serif-condensed"
+        android:textSize="26sp"
+        android:textColor="@color/black"
+        android:text="Title"
+        android:id="@+id/diary_entry_title"
+        android:paddingTop="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
+        android:layout_weight="1"
+        android:paddingTop="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-condensed"
+            android:textSize="22sp"
             android:id="@+id/diary_entry_content"/>
     </ScrollView>
 </LinearLayout>

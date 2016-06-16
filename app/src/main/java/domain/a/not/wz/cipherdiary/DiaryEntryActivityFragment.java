@@ -21,7 +21,6 @@ public class DiaryEntryActivityFragment extends Fragment {
 
     private String mId;
     private TextView mTitleView;
-    private TextView mDateView;
     private TextView mContentView;
 
     public DiaryEntryActivityFragment() {
@@ -37,11 +36,17 @@ public class DiaryEntryActivityFragment extends Fragment {
         mContentView.setText(c.getString(c.getColumnIndex("content")));
 
         long date = c.getLong(c.getColumnIndex("date")) * 1000L;
-        SimpleDateFormat sdf = new SimpleDateFormat("d MMM yyyy");
+        setDateInActionBar(date);
+
+        c.close();
+    }
+
+    private void setDateInActionBar(long date){
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy MMMM d");
         GregorianCalendar cal = new GregorianCalendar();
         cal.setTimeInMillis(date);
-        mDateView.setText(sdf.format(cal.getTime()));
-        c.close();
+        getActivity().setTitle(sdf.format(cal.getTime()));
+
     }
 
     @Override
@@ -50,7 +55,6 @@ public class DiaryEntryActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_diary_entry, container, false);
 
         mTitleView = (TextView) rootView.findViewById(R.id.diary_entry_title);
-        mDateView = (TextView) rootView.findViewById(R.id.diary_entry_date);
         mContentView= (TextView) rootView.findViewById(R.id.diary_entry_content);
 
         return rootView;
