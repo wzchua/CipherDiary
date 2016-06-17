@@ -1,5 +1,6 @@
 package domain.a.not.wz.cipherdiary.ui.CoreActivity;
 
+import android.content.Context;
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -22,9 +23,9 @@ import domain.a.not.wz.cipherdiary.data.DiaryRecyclerViewAdapter;
 
 /**
  * A fragment containing for the view of list for navigating diary entries
- * TODO: spilt into 3 separate fragments
+ * TODO: rework: single fragment seems to still be better
  */
-public class CoreActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+public class CoreActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor>, DiaryRecyclerViewAdapter.OnItemClickListener {
 
     public static final int CORE_FRAGMENT_YEAR_MONTH_LISTVIEW = 100;
     public static final int CORE_FRAGMENT_DAY_LISTVIEW = 200;
@@ -64,7 +65,7 @@ public class CoreActivityFragment extends Fragment implements LoaderManager.Load
         View rootView = inflater.inflate(R.layout.fragment_core, container, false);
         Bundle args = getArguments();
         mCoreType = args.getInt(CORE_TYPE_KEY);
-        mAdapter = new DiaryRecyclerViewAdapter(getActivity(), null, mCoreType);
+        mAdapter = new DiaryRecyclerViewAdapter(null, mCoreType, this);
         getLoaderManager().initLoader(DIARY_LOADER, null, this);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.date_list_view);
@@ -78,39 +79,9 @@ public class CoreActivityFragment extends Fragment implements LoaderManager.Load
         mRecyclerView.addItemDecoration(new DiaryRecyclerViewAdapter.DividerItemDecoration(getActivity()));
         mRecyclerView.setAdapter(mAdapter);
 
-        mAdapter.setOnItemClickListener(new DiaryRecyclerViewAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, Cursor cursor, int adapterType) {
-                Log.v("CoreActivityFramgent", "setOnItemClickListener");
-                switch(adapterType) {
-                    case CORE_FRAGMENT_YEAR_MONTH_LISTVIEW: {
-                        int year = cursor.getInt(cursor.getColumnIndex("year"));
-                        int month = cursor.getInt(cursor.getColumnIndex("month"));
-                        mListener.onYearMonthSelected(year, month);
-                        break;
-                    }
-                    case CORE_FRAGMENT_DAY_LISTVIEW: {
-                        int year = Integer.parseInt(getArguments().getString(CORE_YEAR_KEY));
-                        int month = Integer.parseInt(getArguments().getString(CORE_MONTH_KEY));
-                        //bug
-                        //int day = cursor.getInt(cursor.getColumnIndex("day"));
-                        int day = Integer.parseInt(cursor.getString(cursor.getColumnIndex("day")));
-                        mListener.onYearMonthDaySelected(year, month, day);
-                        break;
-                    }
-                    case CORE_FRAGMENT_ENTRIES_LISTVIEW: {
-                        String id = cursor.getString(cursor.getColumnIndex("_id"));
-                        mListener.onItemSelected(id);
-                        break;
-                    }
-                    default:
-                        throw new IllegalArgumentException("invalid core type");
-                }
-            }
-        });
-
         return rootView;
     }
+
 
     private void setActionBarTitle(Bundle args) {
         String diaryName = args.getString(CoreActivity.DIARY_NAME_KEY);
@@ -141,6 +112,35 @@ public class CoreActivityFragment extends Fragment implements LoaderManager.Load
                 String title = diaryName + " - " + yearString + " " + monthString + " " + dayString;
 
                 getActivity().setTitle(title);
+                break;
+            }
+            default:
+                throw new IllegalArgumentException("invalid core type");
+        }
+    }
+
+    @Override
+    public void onItemClick(View view, Cursor cursor) {
+        Log.v("CoreActivityFramgent", "setOnItemClickListener");
+        switch(mCoreType) {
+            case CORE_FRAGMENT_YEAR_MONTH_LISTVIEW: {
+                int year = cursor.getInt(cursor.getColumnIndex("year"));
+                int month = cursor.getInt(cursor.getColumnIndex("month"));
+                mListener.onYearMonthSelected(year, month);
+                break;
+            }
+            case CORE_FRAGMENT_DAY_LISTVIEW: {
+                int year = Integer.parseInt(getArguments().getString(CORE_YEAR_KEY));
+                int month = Integer.parseInt(getArguments().getString(CORE_MONTH_KEY));
+                //bug
+                //int day = cursor.getInt(cursor.getColumnIndex("day"));
+                int day = Integer.parseInt(cursor.getString(cursor.getColumnIndex("day")));
+                mListener.onYearMonthDaySelected(year, month, day);
+                break;
+            }
+            case CORE_FRAGMENT_ENTRIES_LISTVIEW: {
+                String id = cursor.getString(cursor.getColumnIndex("_id"));
+                mListener.onItemSelected(id);
                 break;
             }
             default:
@@ -184,14 +184,6 @@ public class CoreActivityFragment extends Fragment implements LoaderManager.Load
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-//        Log.v("CoreActivityFragment", "onLoadFinished");
-//        if(data.moveToFirst()) {
-//            String[] names = data.getColumnNames();
-//            for (String name : names) {
-//                Log.v("CoreActivityFragment", "Cursor: " + name + " : "
-//                        + data.getString(data.getColumnIndex(name)));
-//            }
-//        }
         mAdapter.swapCursor(data);
         if(mAdapter.getItemCount() == 0){
             mRecyclerView.setVisibility(View.GONE);
@@ -207,7 +199,21 @@ public class CoreActivityFragment extends Fragment implements LoaderManager.Load
         mAdapter.swapCursor(null);
     }
 
-    public void setOnDiarySelectedListener(OnDiaryEntrySelectedListener listener) {
-        mListener = listener;
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        if (context instanceof OnDiaryEntrySelectedListener) {
+            mListener = (OnDiaryEntrySelectedListener) context;
+        } else {
+            throw new RuntimeException(context.toString()
+                    + " must implement OnDiaryEntrySelectedListener");
+        }
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        mListener = null;
+    }
+
 }

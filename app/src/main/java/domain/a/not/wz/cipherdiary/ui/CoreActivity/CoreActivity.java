@@ -15,9 +15,17 @@ import domain.a.not.wz.cipherdiary.ui.InputEntryActivity.InputEntryActivity;
 import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.ui.LoginActivity.LoginActivity;
 
-public class CoreActivity extends AppCompatActivity implements CoreActivityFragment.OnDiaryEntrySelectedListener {
+public class CoreActivity extends AppCompatActivity implements YearMonthViewFragment.OnYearMonthSelectedListener, DayViewFragment.OnDaySelectedListener, EntryViewFragment.OnEntrySelectedListener {
     private static final String LOG_TAG = CoreActivity.class.getSimpleName();
     public static final String DIARY_NAME_KEY = "diaryName";
+    public static final int CORE_FRAGMENT_YEAR_MONTH_LISTVIEW = 100;
+    public static final int CORE_FRAGMENT_DAY_LISTVIEW = 200;
+    public static final int CORE_FRAGMENT_ENTRIES_LISTVIEW = 300;
+    static final String CORE_TYPE_KEY = "CORE_FRAGMENT_TYPE";
+    static final String CORE_YEAR_KEY = "CORE_FRAGMENT_YEAR";
+    static final String CORE_MONTH_KEY = "CORE_FRAGMENT_MONTH";
+    static final String CORE_DAY_KEY = "CORE_FRAGMENT_DAY";
+
     private boolean mTwoPane = false;
     private String mDiaryName;
 
@@ -30,12 +38,11 @@ public class CoreActivity extends AppCompatActivity implements CoreActivityFragm
 
         mDiaryName = getIntent().getStringExtra(DIARY_NAME_KEY);
 
-        CoreActivityFragment fragment = new CoreActivityFragment();
+        YearMonthViewFragment fragment = new YearMonthViewFragment();
         Bundle args = new Bundle();
-        args.putInt(CoreActivityFragment.CORE_TYPE_KEY, CoreActivityFragment.CORE_FRAGMENT_YEAR_MONTH_LISTVIEW);
+        args.putInt(CORE_TYPE_KEY, CORE_FRAGMENT_YEAR_MONTH_LISTVIEW);
         args.putString(DIARY_NAME_KEY, mDiaryName);
         fragment.setArguments(args);
-        fragment.setOnDiarySelectedListener(this);
 
         getSupportFragmentManager().beginTransaction()
                 .add(R.id.fragment_core_container, fragment)
@@ -88,7 +95,7 @@ public class CoreActivity extends AppCompatActivity implements CoreActivityFragm
     }
 
     @Override
-    public void onItemSelected(String id) {
+    public void onEntrySelected(String id) {
         Intent intent = new Intent(this, DiaryEntryActivity.class);
         intent.putExtra("ID", id);
         intent.putExtra(DIARY_NAME_KEY, mDiaryName);
@@ -97,16 +104,15 @@ public class CoreActivity extends AppCompatActivity implements CoreActivityFragm
 
     @Override
     public void onYearMonthSelected(int year, int month) {
-        CoreActivityFragment fragment = new CoreActivityFragment();
+        DayViewFragment fragment = new DayViewFragment();
         Bundle args = new Bundle();
-        args.putInt(CoreActivityFragment.CORE_TYPE_KEY, CoreActivityFragment.CORE_FRAGMENT_DAY_LISTVIEW);
-        args.putString(CoreActivityFragment.CORE_YEAR_KEY,
+        args.putInt(CORE_TYPE_KEY, CORE_FRAGMENT_DAY_LISTVIEW);
+        args.putString(CORE_YEAR_KEY,
                 String.format(Locale.ENGLISH, "%04d", year));
-        args.putString(CoreActivityFragment.CORE_MONTH_KEY,
+        args.putString(CORE_MONTH_KEY,
                 String.format(Locale.ENGLISH, "%02d", month));
         args.putString(DIARY_NAME_KEY, mDiaryName);
         fragment.setArguments(args);
-        fragment.setOnDiarySelectedListener(this);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_core_container, fragment)
@@ -115,19 +121,18 @@ public class CoreActivity extends AppCompatActivity implements CoreActivityFragm
     }
 
     @Override
-    public void onYearMonthDaySelected(int year, int month, int day) {
-        CoreActivityFragment fragment = new CoreActivityFragment();
+    public void onDaySelected(int year, int month, int day) {
+        EntryViewFragment fragment = new EntryViewFragment();
         Bundle args = new Bundle();
-        args.putInt(CoreActivityFragment.CORE_TYPE_KEY, CoreActivityFragment.CORE_FRAGMENT_ENTRIES_LISTVIEW);
-        args.putString(CoreActivityFragment.CORE_YEAR_KEY,
+        args.putInt(CORE_TYPE_KEY, CORE_FRAGMENT_ENTRIES_LISTVIEW);
+        args.putString(CORE_YEAR_KEY,
                 String.format(Locale.ENGLISH, "%04d", year));
-        args.putString(CoreActivityFragment.CORE_MONTH_KEY,
+        args.putString(CORE_MONTH_KEY,
                 String.format(Locale.ENGLISH, "%02d", month));
-        args.putString(CoreActivityFragment.CORE_DAY_KEY,
+        args.putString(CORE_DAY_KEY,
                 String.format(Locale.ENGLISH, "%02d", day));
         args.putString(DIARY_NAME_KEY, mDiaryName);
         fragment.setArguments(args);
-        fragment.setOnDiarySelectedListener(this);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_core_container, fragment)

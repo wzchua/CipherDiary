@@ -27,14 +27,13 @@ public class DiaryRecyclerViewAdapter extends RecyclerViewCursorAdapter<DiaryRec
 
     private static final SimpleDateFormat YEAR_MONTH_DATE_FORMAT = new SimpleDateFormat("yyyy MMMM");
 
-    private Context mContext;
     private OnItemClickListener mListener;
     private int mAdapterType; //controls the list type (ym/d/entries)
 
-    public DiaryRecyclerViewAdapter(Context context, Cursor cursor, int adapterType) {
+    public DiaryRecyclerViewAdapter(Cursor cursor, int adapterType, OnItemClickListener listener) {
         super(cursor);
-        mContext = context;
         mAdapterType = adapterType;
+        mListener = listener;
     }
 
     @Override
@@ -55,7 +54,7 @@ public class DiaryRecyclerViewAdapter extends RecyclerViewCursorAdapter<DiaryRec
     }
 
     public interface OnItemClickListener {
-        public void onItemClick(View view, Cursor cursor, int adapterType);
+        public void onItemClick(View view, Cursor cursor);
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -97,7 +96,7 @@ public class DiaryRecyclerViewAdapter extends RecyclerViewCursorAdapter<DiaryRec
             if(mListener != null) {
                 int pos = getAdapterPosition();
                 getCursor().moveToPosition(pos);
-                mListener.onItemClick(v, getCursor(), mAdapterType);
+                mListener.onItemClick(v, getCursor());
             }
         }
     }
