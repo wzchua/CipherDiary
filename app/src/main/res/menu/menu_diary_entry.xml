@@ -1,7 +1,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="domain.a.not.wz.cipherdiary.DiaryEntryActivity">
+    tools:context=".ui.DiaryEntryActivity.DiaryEntryActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

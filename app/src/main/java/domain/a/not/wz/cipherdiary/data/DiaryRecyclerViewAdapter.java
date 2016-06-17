@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
-import domain.a.not.wz.cipherdiary.CoreActivityFragment;
+import domain.a.not.wz.cipherdiary.ui.CoreActivity.CoreActivityFragment;
 import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.tools.RecyclerViewCursorAdapter;
 

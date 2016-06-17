@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import domain.a.not.wz.cipherdiary.CoreActivityFragment;
 import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.tools.RecyclerViewCursorAdapter;
 

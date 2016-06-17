@@ -1,4 +1,4 @@
-package domain.a.not.wz.cipherdiary;
+package domain.a.not.wz.cipherdiary.ui.LoginActivity;
 
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,9 +15,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import domain.a.not.wz.cipherdiary.ui.CoreActivity.CoreActivity;
+import domain.a.not.wz.cipherdiary.ui.DeleteDiaryListActivity.DeleteDiaryListActivity;
+import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.data.DiaryProviderHelper;
 
-public class LoginActivity extends AppCompatActivity implements LoginActivityFragment.OnPasswordInputListener{
+public class LoginActivity extends AppCompatActivity implements LoginActivityFragment.OnPasswordInputListener {
     private static final String EMPTY_STRING = "";
     private AlertDialog mAlertDialog;
 
@@ -87,14 +90,14 @@ public class LoginActivity extends AppCompatActivity implements LoginActivityFra
         alertDialog.setOnShowListener(new DialogInterface.OnShowListener() {
             @Override
             public void onShow(final DialogInterface dialog) {
-                final AlertDialog aDilog = (AlertDialog) dialog;
-                aDilog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
+                final AlertDialog aDialog = (AlertDialog) dialog;
+                aDialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         Log.v("alertDialog", "onCLick");
-                        EditText diaryNameView = (EditText) aDilog.findViewById(R.id.create_diary_name);
-                        EditText passwordView = (EditText) aDilog.findViewById(R.id.create_password);
-                        EditText passwordConfirmationView = (EditText) aDilog.findViewById(R.id.create_password_confirmation);
+                        EditText diaryNameView = (EditText) aDialog.findViewById(R.id.create_diary_name);
+                        EditText passwordView = (EditText) aDialog.findViewById(R.id.create_password);
+                        EditText passwordConfirmationView = (EditText) aDialog.findViewById(R.id.create_password_confirmation);
 
                         if (TextUtils.isEmpty(diaryNameView.getText()) ||
                                 TextUtils.isEmpty(passwordView.getText()) ||

@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".ui.LoginActivity.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustResize"
@@ -21,7 +21,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CoreActivity"
+            android:name=".ui.CoreActivity.CoreActivity"
             android:label="@string/title_activity_core"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -32,31 +32,31 @@
             android:exported="false" />
 
         <activity
-            android:name=".InputEntryActivity"
+            android:name=".ui.InputEntryActivity.InputEntryActivity"
             android:label="@string/title_activity_input_entry"
-            android:parentActivityName=".CoreActivity"
+            android:parentActivityName=".ui.CoreActivity.CoreActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="domain.a.not.wz.cipherdiary.CoreActivity" />
+                android:value=".ui.CoreActivity.CoreActivity" />
         </activity>
         <activity
-            android:name=".DiaryEntryActivity"
+            android:name=".ui.DiaryEntryActivity.DiaryEntryActivity"
             android:label="@string/title_activity_diary_entry"
-            android:parentActivityName=".CoreActivity"
+            android:parentActivityName=".ui.CoreActivity.CoreActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="domain.a.not.wz.cipherdiary.CoreActivity" />
+                android:value=".ui.CoreActivity.CoreActivity" />
         </activity>
         <activity
-            android:name=".DeleteDiaryListActivity"
+            android:name=".ui.DeleteDiaryListActivity.DeleteDiaryListActivity"
             android:label="@string/title_activity_delete_diary_list"
-            android:parentActivityName=".LoginActivity"
+            android:parentActivityName=".ui.LoginActivity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="domain.a.not.wz.cipherdiary.LoginActivity" />
+                android:value=".ui.LoginActivity.LoginActivity" />
         </activity>
     </application>
 

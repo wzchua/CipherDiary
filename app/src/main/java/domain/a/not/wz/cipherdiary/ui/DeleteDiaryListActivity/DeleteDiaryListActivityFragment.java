@@ -1,4 +1,4 @@
-package domain.a.not.wz.cipherdiary;
+package domain.a.not.wz.cipherdiary.ui.DeleteDiaryListActivity;
 
 import android.content.DialogInterface;
 import android.database.Cursor;
@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.data.DiaryContract;
 import domain.a.not.wz.cipherdiary.data.DiaryListRecyclerViewAdapter;
 import domain.a.not.wz.cipherdiary.data.DiaryProviderHelper;

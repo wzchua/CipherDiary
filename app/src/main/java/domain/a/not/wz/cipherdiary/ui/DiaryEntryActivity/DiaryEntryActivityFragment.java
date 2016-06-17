@@ -1,4 +1,4 @@
-package domain.a.not.wz.cipherdiary;
+package domain.a.not.wz.cipherdiary.ui.DiaryEntryActivity;
 
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.GregorianCalendar;
 
+import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.data.DiaryContract;
 import domain.a.not.wz.cipherdiary.data.DiaryProviderHelper;
 

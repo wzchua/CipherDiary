@@ -1,11 +1,11 @@
-package domain.a.not.wz.cipherdiary;
+package domain.a.not.wz.cipherdiary.ui.LoginActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.text.InputFilter;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -22,6 +22,7 @@ import android.widget.SpinnerAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.data.DiaryContract;
 import domain.a.not.wz.cipherdiary.data.DiaryProviderHelper;
 import domain.a.not.wz.cipherdiary.tools.NothingSelectedSpinnerAdapter;
@@ -73,12 +74,13 @@ public class LoginActivityFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
         mPasswordView = (EditText) rootView.findViewById(R.id.password_text);
+        mSpinner = (Spinner) rootView.findViewById(R.id.database_spinner);
+        Button decryptButton = (Button) rootView.findViewById(R.id.decrypt_button);
+
         mPasswordView.setFilters(new InputFilter[] {passwordFilter});
 
-        mSpinner = (Spinner) rootView.findViewById(R.id.database_spinner);
         setUpSpinner();
 
-        Button decryptButton = (Button) rootView.findViewById(R.id.decrypt_button);
         decryptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

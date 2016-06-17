@@ -1,4 +1,4 @@
-package domain.a.not.wz.cipherdiary;
+package domain.a.not.wz.cipherdiary.ui.CoreActivity;
 
 import android.database.Cursor;
 import android.support.v4.app.Fragment;
@@ -16,11 +16,13 @@ import android.view.ViewGroup;
 import java.util.Calendar;
 import java.util.Locale;
 
+import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.data.DiaryProviderHelper;
 import domain.a.not.wz.cipherdiary.data.DiaryRecyclerViewAdapter;
 
 /**
  * A fragment containing for the view of list for navigating diary entries
+ * TODO: spilt into 3 separate fragments
  */
 public class CoreActivityFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
 

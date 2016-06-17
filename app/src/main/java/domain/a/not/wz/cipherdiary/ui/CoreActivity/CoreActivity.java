@@ -1,4 +1,4 @@
-package domain.a.not.wz.cipherdiary;
+package domain.a.not.wz.cipherdiary.ui.CoreActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,6 +9,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import java.util.Locale;
+
+import domain.a.not.wz.cipherdiary.ui.DiaryEntryActivity.DiaryEntryActivity;
+import domain.a.not.wz.cipherdiary.ui.InputEntryActivity.InputEntryActivity;
+import domain.a.not.wz.cipherdiary.R;
+import domain.a.not.wz.cipherdiary.ui.LoginActivity.LoginActivity;
 
 public class CoreActivity extends AppCompatActivity implements CoreActivityFragment.OnDiaryEntrySelectedListener {
     private static final String LOG_TAG = CoreActivity.class.getSimpleName();

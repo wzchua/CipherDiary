@@ -1,4 +1,4 @@
-package domain.a.not.wz.cipherdiary;
+package domain.a.not.wz.cipherdiary.ui.InputEntryActivity;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -12,6 +12,7 @@ import android.widget.DatePicker;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import domain.a.not.wz.cipherdiary.R;
 import domain.a.not.wz.cipherdiary.data.DiaryProviderHelper;
 
 public class InputEntryActivity extends AppCompatActivity implements InputEntryFragment.OnFragmentInteractionListener {
