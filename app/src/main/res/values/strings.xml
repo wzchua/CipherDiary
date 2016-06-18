@@ -7,6 +7,7 @@
     <string name="action_delete_diary">Delete Diary</string>
     <string name="action_lock_diary">Lock Diary</string>
     <string name="action_add_entry">Add Entry</string>
+    <string name="action_delete_entry">Delete</string>
     <string name="title_activity_core">CoreActivity</string>
     <string name="main_selected_db_header">Diary Selected</string>
     <string name="main_selector_prompt">Select a diary</string>
